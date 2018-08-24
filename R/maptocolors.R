@@ -23,6 +23,11 @@ function(vec,col,num=100,range=NULL)
   }
   
   cols <- col(length(breaks) + 1)
-  colvec = as.character(cut(vec, c(-Inf, breaks, Inf), labels=cols))
+  
+  if (length(unique(breaks)) == 1){
+    colvec = cols[match(vec, breaks)]
+  } else {
+    colvec = as.character(cut(vec, c(-Inf, breaks, Inf), labels = cols))
+  }
   return(colvec)
 }
